@@ -18,8 +18,8 @@ Begin by... making the program work perfectly, just for Victoria.
 //
 //let input : Int = 1300    // Simple case
 //let input : Int = 0       // Midnight
-let input : Int = 2359       // A minute before midnight
-//let input : Int = 59       // 00:59 AM
+//let input : Int = 2359       // A minute before midnight
+let input : Int = 59       // 00:59 AM
 
 // Inputs
 let ottawaTime : Int = input
@@ -43,6 +43,18 @@ if stJohnsTime < 0 {
 if stJohnsTime > 2359 {
     stJohnsTime = stJohnsTime - 2400
 }
+// Handle cases where time value goes past 59 minutes
+// e.g.: Ottawa time is 0059, 00:59 AM
+//       Then St. John's time is 2:29 AM and shown as 0189 but should be 0229
+if (stJohnsTime % 100 >= 60) {
+    var properHours = stJohnsTime / 100 * 100
+    var extraMinutes = stJohnsTime % 100
+    var shortHours = extraMinutes / 60 * 100
+    var danglingMinutes = extraMinutes % 60
+    var fixedTime = properHours + shortHours + danglingMinutes
+    stJohnsTime = fixedTime
+}
+
 
 
 // Outputs
