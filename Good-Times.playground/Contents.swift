@@ -19,6 +19,7 @@ Begin by... making the program work perfectly, just for Victoria.
 //let input : Int = 1300    // Simple case
 //let input : Int = 0       // Midnight
 let input : Int = 2359       // A minute before midnight
+//let input : Int = 59       // 00:59 AM
 
 // Inputs
 let ottawaTime : Int = input
@@ -37,6 +38,10 @@ var stJohnsTime : Int = ottawaTime + 130
 // Handle cases with negative time (times in the day before)
 if stJohnsTime < 0 {
     stJohnsTime = 2400 + stJohnsTime
+}
+// Handle cases with time in next day
+if stJohnsTime > 2359 {
+    stJohnsTime = stJohnsTime - 2400
 }
 
 
