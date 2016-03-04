@@ -17,7 +17,8 @@ Begin by... making the program work perfectly, just for Victoria.
 // Test cases
 //
 //let input : Int = 1300    // Simple case
-let input : Int = 0       // Midnight
+//let input : Int = 0       // Midnight
+let input : Int = 2359       // A minute before midnight
 
 // Inputs
 let ottawaTime : Int = input
