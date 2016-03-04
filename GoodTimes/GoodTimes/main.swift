@@ -16,14 +16,48 @@ Begin by... making the program work perfectly, just for Victoria.
 
 // Test cases
 //
-let input : Int = 1300    // Simple case
+//let input : Int = 1300    // Simple case
 //let input : Int = 0       // Midnight
 //let input : Int = 2359    // A minute before midnight
 //let input : Int = 59      // 00:59 AM
 //let input : Int = 2330      // 11:30 PM
 
+
 // Inputs
-let ottawaTime : Int = input
+var ottawaTime : Int = -1   // Purposely set value to something that is not valid
+                            // NOTE: Two tests for valid input...
+                            // 1. valid input time is an integer between between 0 and 2359
+                            // 2. last two digits being between 00 and 59
+// OK, try to get input from the user
+// readLine always returns an optional data type, so use optional binding to attempt to unwrap it
+let errorMessage = "Provide an integer value between 0 and 2359 inclusive."
+if let input = readLine(stripNewline: true) {
+    
+    // Optional binding worked, we have something to work with
+    // The 'input' variable has a type of String (non-optional data type, must have non-nil value now)
+    // Attempt to cast that value as an integer
+    if let inputAsInteger = Int(input) {
+        
+        // If this works, the input was converted to an integer
+        // Now check to see if the integer is in the desired range AND last two digits are between 00 and 59
+        if inputAsInteger >= 0 && inputAsInteger <= 2359 && inputAsInteger % 100 < 60 {
+            
+            // Whew! We have a valid input value. So, assign it to our variable.
+            ottawaTime = inputAsInteger
+            
+        } else {
+            // Print the error message
+            print(errorMessage)
+        }
+        
+    } else {
+        
+        // Could not convert to an integer, show the error message
+        print(errorMessage)
+    }
+    
+}
+
 
 // Process
 
