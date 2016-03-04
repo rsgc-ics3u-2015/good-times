@@ -28,36 +28,41 @@ var ottawaTime : Int = -1   // Purposely set value to something that is not vali
                             // NOTE: Two tests for valid input...
                             // 1. valid input time is an integer between between 0 and 2359
                             // 2. last two digits being between 00 and 59
-// OK, try to get input from the user
-// readLine always returns an optional data type, so use optional binding to attempt to unwrap it
+// Set message to show if problems
 let errorMessage = "Provide an integer value between 0 and 2359 inclusive."
-if let input = readLine(stripNewline: true) {
-    
-    // Optional binding worked, we have something to work with
-    // The 'input' variable has a type of String (non-optional data type, must have non-nil value now)
-    // Attempt to cast that value as an integer
-    if let inputAsInteger = Int(input) {
+// Loop until valid input received
+repeat {
+
+    // OK, try to get input from the user
+    // readLine always returns an optional data type, so use optional binding to attempt to unwrap it
+    if let input = readLine(stripNewline: true) {
         
-        // If this works, the input was converted to an integer
-        // Now check to see if the integer is in the desired range AND last two digits are between 00 and 59
-        if inputAsInteger >= 0 && inputAsInteger <= 2359 && inputAsInteger % 100 < 60 {
+        // Optional binding worked, we have something to work with
+        // The 'input' variable has a type of String (non-optional data type, must have non-nil value now)
+        // Attempt to cast that value as an integer
+        if let inputAsInteger = Int(input) {
             
-            // Whew! We have a valid input value. So, assign it to our variable.
-            ottawaTime = inputAsInteger
+            // If this works, the input was converted to an integer
+            // Now check to see if the integer is in the desired range AND last two digits are between 00 and 59
+            if inputAsInteger >= 0 && inputAsInteger <= 2359 && inputAsInteger % 100 < 60 {
+                
+                // Whew! We have a valid input value. So, assign it to our variable.
+                ottawaTime = inputAsInteger
+                
+            } else {
+                // Print the error message
+                print(errorMessage)
+            }
             
         } else {
-            // Print the error message
+            
+            // Could not convert to an integer, show the error message
             print(errorMessage)
         }
         
-    } else {
-        
-        // Could not convert to an integer, show the error message
-        print(errorMessage)
     }
-    
-}
 
+} while ottawaTime == -1    // Keep looping until ottawaTime set to something valid
 
 // Process
 
