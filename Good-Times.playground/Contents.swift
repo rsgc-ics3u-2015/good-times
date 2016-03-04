@@ -26,6 +26,10 @@ let ottawaTime : Int = input
 
 // Victoria
 var victoriaTime : Int = ottawaTime - 300
+// Handle cases with negative time (times in the day before)
+if victoriaTime < 0 {
+    victoriaTime = 2400 + victoriaTime
+}
 
 // Outputs
 print("\(ottawaTime) in Ottawa")
