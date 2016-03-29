@@ -3,16 +3,16 @@
 // "Good Times"
 
 /*
-
-I need to get the time in other cities across Canada.
-
-Input time is in Ottawa.
-
-I've noticed that Victoria is always 3 hours behind Ottawa.
-
-Begin by... making the program work perfectly, just for Victoria.
-
-*/
+ 
+ I need to get the time in other cities across Canada.
+ 
+ Input time is in Ottawa.
+ 
+ I've noticed that Victoria is always 3 hours behind Ottawa.
+ 
+ Begin by... making the program work perfectly, just for Victoria.
+ 
+ */
 
 // Test cases
 //
@@ -28,60 +28,47 @@ let ottawaTime : Int = input
 
 // Process
 
-// Victoria
-var victoriaTime : Int = ottawaTime - 300
-// Handle cases with negative time (times in the day before)
-if victoriaTime < 0 {
-    victoriaTime = 2400 + victoriaTime
-}
-// Handle cases with time in next day
-if victoriaTime > 2359 {
-    victoriaTime = victoriaTime - 2400
-}
-
-// Edmonton
-var edmontonTime : Int = ottawaTime - 200
-// Handle cases with negative time (times in the day before)
-if edmontonTime < 0 {
-    edmontonTime = 2400 + edmontonTime
-}
-// Handle cases with time in next day
-if edmontonTime > 2359 {
-    edmontonTime = edmontonTime - 2400
-}
-
-// Winnipeg
-var winnipegTime : Int = ottawaTime - 100
-// Handle cases with negative time (times in the day before)
-if winnipegTime < 0 {
-    winnipegTime = 2400 + winnipegTime
-}
-// Handle cases with time in next day
-if winnipegTime > 2359 {
-    winnipegTime = winnipegTime - 2400
+// shift
+// Purpose: Shifts the provided time by the amount indicated.
+//
+// Parameters:  timeBy      Int     The time to be shifted.
+//              howMuch     Int     How much to shift the provided time by.
+//
+// Returns:                 Int     The shifted time.
+//
+func shift(timeBy: Int, howMuch: Int) -> Int {
+    
+    var shiftedTime : Int = timeBy + howMuch
+    
+    // Handle cases with negative time (times in the day before)
+    if shiftedTime < 0 {
+        shiftedTime = 2400 + shiftedTime
+    }
+    
+    // Handle cases with time in next day
+    if shiftedTime > 2359 {
+        shiftedTime = shiftedTime - 2400
+    }
+    
+    // Return the shifted time value for this city
+    return shiftedTime
+    
 }
 
-// Halifax
-var halifaxTime : Int = ottawaTime + 100
-// Handle cases with negative time (times in the day before)
-if halifaxTime < 0 {
-    halifaxTime = 2400 + halifaxTime
-}
-// Handle cases with time in next day
-if halifaxTime > 2359 {
-    halifaxTime = halifaxTime - 2400
-}
+// Process Victoria
+var victoriaTime : Int = shift(ottawaTime, howMuch: -300)
 
-// St. John's
-var stJohnsTime : Int = ottawaTime + 130
-// Handle cases with negative time (times in the day before)
-if stJohnsTime < 0 {
-    stJohnsTime = 2400 + stJohnsTime
-}
-// Handle cases with time in next day
-if stJohnsTime > 2359 {
-    stJohnsTime = stJohnsTime - 2400
-}
+// Process Edmonton
+var edmontonTime : Int = shift(ottawaTime, howMuch: -200)
+
+// Process Winnipeg
+var winnipegTime : Int = shift(ottawaTime, howMuch: -100)
+
+// Process Halifax
+var halifaxTime : Int = shift(ottawaTime, howMuch: 100)
+
+// Process St. John's
+var stJohnsTime : Int = shift(ottawaTime, howMuch: 130)
 // Handle cases where time value goes past 59 minutes
 // e.g.: Ottawa time is 0059, 00:59 AM
 //       Then St. John's time is 2:29 AM and shown as 0189 but should be 0229
